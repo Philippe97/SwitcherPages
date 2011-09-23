@@ -35,16 +35,6 @@ MSHook(void, SBAppSwitcherBarView$prepareForDisplay$, SBAppSwitcherBarView *self
 	_SBAppSwitcherBarView$prepareForDisplay$(self, sel, inconnu);
 	UIScrollView* &scrollView(MSHookIvar<UIScrollView*>(self, "_scrollView"));
 	updatePageControlWithBarViewAndScrollView(self, scrollView);
-	/*
-	for (id sub in self.subviews) {
-		if ([sub isKindOfClass:[UIPageControl class]]) {
-			float pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width;
-			float pageCount = scrollView.contentSize.width / scrollView.frame.size.width;
-			[(UIPageControl*)sub setNumberOfPages:pageCount];
-			[(UIPageControl*)sub setCurrentPage:pageNumber];
-			break;
-		}
-	}*/
 }
 
 MSHook(void, SBAppSwitcherBarView$scrollViewDidEndDecelerating$, SBAppSwitcherBarView *self, SEL sel, UIScrollView *scrollView) {
@@ -55,30 +45,12 @@ MSHook(void, SBAppSwitcherBarView$scrollViewDidEndDecelerating$, SBAppSwitcherBa
 MSHook(void, SBAppSwitcherBarView$scrollViewDidEndScrollingAnimation$, SBAppSwitcherBarView *self, SEL sel, UIScrollView *scrollView) {
 	_SBAppSwitcherBarView$scrollViewDidEndScrollingAnimation$(self, sel, scrollView);
 	updatePageControlWithBarViewAndScrollView(self, scrollView);
-	/*for (id sub in self.subviews) {
-		if ([sub isKindOfClass:[UIPageControl class]]) {
-			float pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width;
-			float pageCount = scrollView.contentSize.width / scrollView.frame.size.width;
-			[(UIPageControl*)sub setNumberOfPages:pageCount];
-			[(UIPageControl*)sub setCurrentPage:pageNumber];
-			break;
-		}
-	}*/
 }
 
 MSHook(void, SBAppSwitcherBarView$setEditing$, SBAppSwitcherBarView *self, SEL sel, BOOL editing) {
 	_SBAppSwitcherBarView$setEditing$(self, sel, editing);
 	UIScrollView* &scrollView(MSHookIvar<UIScrollView*>(self, "_scrollView"));
 	updatePageControlWithBarViewAndScrollView(self, scrollView);
-	/*for (id sub in self.subviews) {
-		if ([sub isKindOfClass:[UIPageControl class]]) {
-			float pageNumber = scrollView.contentOffset.x / scrollView.frame.size.width;
-			float pageCount = scrollView.contentSize.width / scrollView.frame.size.width;
-			[(UIPageControl*)sub setNumberOfPages:pageCount];
-			[(UIPageControl*)sub setCurrentPage:pageNumber];
-			break;
-		}
-	}*/
 }
 
 extern "C" void TweakInitialize() {
